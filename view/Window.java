@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.Component;
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -12,9 +12,9 @@ public class Window {
 
     public void initialize_window() {
         frame = new JFrame("Code Planner");
-        System.out.println(frame.getComponents());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1536,820);
-        frame.setLayout(null);
+        // frame.setLayout(null);
         mb = Menu.initialize_menu_bar();
 
     }
@@ -28,24 +28,21 @@ public class Window {
     }
 
     public void welcome_message() {
-        JPanel welcomePanel = new JPanel();
-        String welcome_1 = "Welcome to Puls Code Planner:";
-        String welcome_2 = "Use the file tab to create or continue a project";
-        JLabel welcome_label_1 = new JLabel();
-        JLabel welcome_label_2 = new JLabel();
-        welcome_label_1.setText(welcome_1);
-        welcome_label_2.setText(welcome_2);
-        welcome_label_1.setVerticalTextPosition(JLabel.CENTER);
-        welcome_label_2.setHorizontalTextPosition(JLabel.CENTER);
-        welcomePanel.add(welcome_label_1);
-        welcomePanel.add(welcome_label_2);
-        frame.getContentPane().add(welcomePanel);
-        // frame.add(welcome_label_1);
-        // frame.add(welcome_label_2);
-        Component[] components = frame.getComponents();
-        for (Component component : components) {
-            System.out.println(component);
-        }
+        JPanel welcomePanel = new JPanel(new GridBagLayout());
+        create_welcome_label(welcomePanel, "Welcome to Puls Code Planner:", 1, 0, 0.0, 0.0);
+        create_welcome_label(welcomePanel, "Use the file tab to create or continue a project", 1, 1, 0.0, 1.0);
+        frame.add(welcomePanel);
 
+    }
+
+    private void create_welcome_label(JPanel welcomePanel, String string, int gridx, int gridy, double weightx, double weighty) {
+        GridBagConstraints constraints = new GridBagConstraints();
+        JLabel welcome_label = new JLabel(string);
+        GridPositioning.set_grid_x(constraints, gridx);
+        GridPositioning.set_grid_y(constraints, gridy);
+        GridPositioning.set_weight_x(constraints, weightx);
+        GridPositioning.set_weight_y(constraints, weighty);
+        GridPositioning.set_anchor(constraints, GridBagConstraints.PAGE_START);
+        welcomePanel.add(welcome_label, constraints);
     }
 }

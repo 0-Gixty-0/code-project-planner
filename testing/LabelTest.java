@@ -35,7 +35,7 @@ class text extends JFrame {
         p.add(l);
  
         // add panel to frame
-        f.add(p);
+        f.add(l);
  
         // set the size of frame
         f.setSize(300, 300);
