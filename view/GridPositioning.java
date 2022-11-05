@@ -28,4 +28,20 @@ public class GridPositioning {
     public static void set_weight_y(GridBagConstraints constraints, double y) {
         constraints.weighty = y;
     }
+
+    public static void setConstraints(GridBagConstraints constraints, int gridX, int gridY, int constant, double weightX, double weightY, int gridWidth, int gridHeight) {
+        constraints.gridx = gridX;
+        constraints.gridy = gridY;
+        constraints.anchor = constant;
+        constraints.weightx = weightX;
+        constraints.weighty = weightY;
+        constraints.gridwidth = gridWidth;
+        constraints.gridheight = gridHeight;
+    }
+
+    public static void positionComponent(JPanel panel, Component component, int gridX, int gridY, int constant, double weightX, double weightY, int gridWidth, int gridHeight) {
+        GridBagConstraints constraints = new GridBagConstraints();
+        GridPositioning.setConstraints(constraints, gridX, gridY, constant, weightX, weightY, gridWidth, gridHeight);
+        panel.add(component, constraints);
+    }
 }

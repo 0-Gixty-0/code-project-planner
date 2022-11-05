@@ -2,6 +2,7 @@ package view;
 
 import model.File;
 import model.actions.CreateProjectAction;
+import model.actions.CreateProjectCreationDialog;
 import model.actions.OpenProjectAction;
 import config.WaMC;
 
@@ -46,22 +47,17 @@ public class Menu {
     private static void create_menu_items_for_file_menu(JMenu menu, String[] strings, int numItems) {
         for (int i = 0; i < numItems; i++) {
             JMenuItem x = new JMenuItem();
-            // System.out.println(i);
-            // System.out.println(strings[i]);
             switch (strings[i]) {
                 case "New Project":
-                    x.setAction(new CreateProjectAction());
-                    // System.out.println("ok");
+                    x.setAction(new CreateProjectCreationDialog());
                     break;
 
                 case "Open Project":
                     x.setAction(new OpenProjectAction());
-                    // System.out.println("AGGGHHH");
             }
             x.setText(strings[i]);
             File.append_menu_item(x);
             menu.add(x);
-            // System.out.println("");
         }
     }
 }

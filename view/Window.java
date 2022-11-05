@@ -8,7 +8,7 @@ import events.editor.*;
 import events.listeners.*;
 
 public class Window {
-    static JFrame frame;
+    static private JFrame frame;
     static JMenuBar mb;
     static JPanel mainPanel;
     static Editor editor = new Editor();
@@ -60,6 +60,19 @@ public class Window {
         // Stuck here right now -->
     public static void clear_panel() {
         Window.mainPanel.removeAll();
-        Window.mainPanel.validate();
+        Window.mainPanel.repaint();
+        revalidateFrame();
+    }
+
+    public static JFrame getJFrame() {
+        return frame;
+    }
+
+    public static JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public static void revalidateFrame() {
+        Window.mainPanel.revalidate();
     }
 }
