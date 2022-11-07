@@ -32,7 +32,7 @@ public class ProjectDialog extends CanCollectInput {
         pathInputLabel = new JLabel("Enter a path for your project: ");
         nameInputField = new JTextField(20);
         pathInputField = new JTextField(FilePaths.DEFAULTPROJECTDIRECTORY, 20);
-        createButton = new JButton("Create Project");
+        createButton = new JButton();
 
         title.setFont( new Font("Arial", Font.PLAIN, 20));
 
@@ -42,6 +42,7 @@ public class ProjectDialog extends CanCollectInput {
     private void initializeDialog() {
         this.positionComponents();
         createButton.setAction(new CreateProjectAction(this));
+        createButton.setText("Create Project");
         dialog.add(panel);
         dialog.setSize(1536, 820);
     }

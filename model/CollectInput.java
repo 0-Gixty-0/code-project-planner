@@ -1,13 +1,7 @@
 package model;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
-
-import model.abstractclasses.CanCollectInput;
-import view.ProjectDialog;
 
 public class CollectInput {
 

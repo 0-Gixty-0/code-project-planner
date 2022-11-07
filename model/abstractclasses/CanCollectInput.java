@@ -1,8 +1,5 @@
 package model.abstractclasses;
 
-import java.util.ArrayList;
-
-import javax.swing.JDialog;
 import javax.swing.JTextField;
 
 public abstract class CanCollectInput {

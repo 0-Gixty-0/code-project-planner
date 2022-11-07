@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import config.FilePaths;
 import view.Window;
 import view.GridPositioning;
 import view.ProjectDialog;
@@ -30,7 +31,7 @@ public class CreateProjectAction extends AbstractAction{
     public void actionPerformed(ActionEvent e) {
         inputStrings = CollectInput.getInputs(source.getTextFields());
         projectName = inputStrings.get(0);
-        path = inputStrings.get(1);
+        path = inputStrings.get(1) + "//" + projectName;
         createProjectTitle();
         createProjectFile();
     }
@@ -38,6 +39,7 @@ public class CreateProjectAction extends AbstractAction{
     private void createProjectFile() {
         CreateFile.create(path);
         WriteToFile.initializeProjectFile(path, projectName);
+        FilePaths.updateProjectPathsHashMap(projectName, path);
     }
 
     private void createProjectTitle() {
@@ -46,11 +48,4 @@ public class CreateProjectAction extends AbstractAction{
         panel.add(projectTitleLabel);
         frame.add(panel);
     }
-
-    // private void awaitInput() {
-    //     while (!dialog.isInputRecieved()) {
-    //         System.out.println("DISPLAYED_MNEMONIC_INDEX_KEY");
-    //     }
-    //     inputStrings = dialog.getRecievedInputs();
-    // }
 }
