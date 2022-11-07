@@ -22,11 +22,8 @@ public class DeleteProjectAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Action commenced");
         projectsToDelete = source.getProjectsToDelete();
-        System.out.println(projectsToDelete.size());
         for (String projectName : projectsToDelete) {
-            System.out.println(projectName);
             projectPath = FilePaths.projectPathsHashMap.get(projectName);
             File file = new File(projectPath);
  
@@ -34,6 +31,7 @@ public class DeleteProjectAction extends AbstractAction {
                 System.out.println("File deleted successfully");
                 ProjectsHandling.updateNumProjects(ProjectsHandling.getNumProjects(), -1);
                 ProjectsHandling.removeProjectName(projectName);
+                ProjectsHandling.removeProjectPath(projectPath);
             }
             else {
                 System.out.println("Failed to delete the file");

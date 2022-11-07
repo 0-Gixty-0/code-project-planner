@@ -16,6 +16,7 @@ public class WriteToFile {
             System.out.println("Initialized new project");
             ProjectsHandling.updateNumProjects(ProjectsHandling.getNumProjects(), 1);
             ProjectsHandling.writeProjectName(fileName);
+            ProjectsHandling.writeProjectPath(path);
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

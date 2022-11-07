@@ -90,4 +90,41 @@ public class ProjectsHandling {
     public static void main(String[] args) {
         System.out.println(ProjectsHandling.getProjectNames());
     }
+
+    public static ArrayList<String> getProjectPaths() {
+        return ReadFromFile.getFileContents(FilePaths.PROJECTPATHSFILE);
+    }
+
+    public static void writeProjectPath(String path) {
+        ArrayList<String> contents = ReadFromFile.getFileContents(FilePaths.PROJECTPATHSFILE);
+        try {
+            File targetFile = new File(FilePaths.PROJECTPATHSFILE);
+            writer = new FileWriter(targetFile);
+            for (String data : contents) {
+                writer.write(data + "\n");
+            }
+            writer.write(path + "\n");
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An Errror Ocurred");
+            e.printStackTrace();
+        }
+    }
+
+    public static void removeProjectPath(String projectPath) {
+        ArrayList<String> contents = ProjectsHandling.getProjectPaths();
+        try {
+            File targetFile = new File(FilePaths.PROJECTPATHSFILE);
+            writer = new FileWriter(targetFile);
+            for (String data : contents) {
+                if (!data.equals(projectPath)) {
+                    writer.write(data + "\n");
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An Errror Ocurred");
+            e.printStackTrace();
+        }
+    }
 }

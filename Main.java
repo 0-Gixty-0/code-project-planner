@@ -1,3 +1,4 @@
+import config.FilePaths;
 import view.Window;
 
 public class Main{
@@ -8,6 +9,7 @@ public class Main{
 
     public void run(){
         // initialize_model();
+        FilePaths.initializeConfig();
         Window.initialize_window();
         Window.initialize_listeners();
         Window.render_menu();
