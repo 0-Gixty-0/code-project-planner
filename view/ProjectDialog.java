@@ -47,7 +47,7 @@ public class ProjectDialog extends CanCollectInput {
         dialog.setSize(1536, 820);
     }
 
-    private void positionComponents() {
+    protected void positionComponents() {
         positionLabels();
         positionInputFields();
         positionButtons();
@@ -82,17 +82,4 @@ public class ProjectDialog extends CanCollectInput {
         return new JTextField[]{nameInputField,pathInputField};
     }
 
-    // public ArrayList<String> getRecievedInputs()  {
-    //     return recievedInputs;
-    // }
-
-    // public boolean isInputRecieved()  {
-    //     return inputRecieved;
-    // }
-
-    // @Override
-    // public void setRecievedInputs(ArrayList<String> inputStrings) {
-    //     recievedInputs = inputStrings;
-    //     inputRecieved = true;
-    // }
 }

@@ -51,7 +51,7 @@ public class Menu {
                     break;
 
                 case "Open Project":
-                    x.setAction(new OpenProjectAction());
+                    x.setAction(new CreateOpenProjectDialog());
                     break;
 
                 case "Delete Project":

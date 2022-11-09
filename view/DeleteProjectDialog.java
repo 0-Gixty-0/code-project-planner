@@ -6,10 +6,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.awt.event.*;
 
+import model.abstractclasses.HasComponents;
 import model.actions.*;
 import model.filehandling.ProjectsHandling;
 
-public class DeleteProjectDialog implements ItemListener {
+public class DeleteProjectDialog implements HasComponents, ItemListener {
     private JDialog dialog;
     private JPanel panel;
     private JLabel title;
@@ -19,7 +20,7 @@ public class DeleteProjectDialog implements ItemListener {
     private ArrayList<String> projectsToDelete;
 
     public DeleteProjectDialog() {
-        dialog = new JDialog(Window.getJFrame(),"Create New Project");
+        dialog = new JDialog(Window.getJFrame(),"Delete a project");
         panel = new JPanel(new GridBagLayout());
         title = new JLabel("To delete a project select it in the check box then press the delete button");
         deleteButton = new JButton();
@@ -39,7 +40,7 @@ public class DeleteProjectDialog implements ItemListener {
         dialog.setSize(1536, 820);
     }
 
-    private void positionComponents() {
+    public void positionComponents() {
         positionLabels();
         positionCheckBoxes();
         positionButtons();
@@ -59,13 +60,13 @@ public class DeleteProjectDialog implements ItemListener {
             for (i = 0; i < ProjectsHandling.getNumProjects()-1; i++) {
                 selectionCheckBox = new JCheckBox(projectNames.get(i));
                 selectionCheckBox.addItemListener(this);
-                GridPositioning.positionComponent(panel, selectionCheckBox, 0, i, GridBagConstraints.CENTER, 0.0, 0.1, 1, 1);
+                GridPositioning.positionComponent(panel, selectionCheckBox, 0, i+1, GridBagConstraints.CENTER, 0.0, 0.1, 1, 1);
                 checkBoxes.add(selectionCheckBox);
             }
             selectionCheckBox = new JCheckBox(projectNames.get(i));
             selectionCheckBox.addItemListener(this);
             checkBoxes.add(selectionCheckBox);
-            GridPositioning.positionComponent(panel, selectionCheckBox, 0, i, GridBagConstraints.CENTER, 0.0, 1.0, 1, 1);
+            GridPositioning.positionComponent(panel, selectionCheckBox, 0, i+1, GridBagConstraints.CENTER, 0.0, 1.0, 1, 1);
         }
     }
 
@@ -84,14 +85,10 @@ public class DeleteProjectDialog implements ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        System.out.println("state changed original");
         Object source = e.getItemSelectable();
-        System.out.println(checkBoxes.size());
         for (JCheckBox box : checkBoxes) {
-            System.out.println("State changed");
             if (box == source) {
                 projectsToDelete.add(box.getText());
-                System.out.println("addedd to deleteion list");
             }
         }
         
