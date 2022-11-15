@@ -1,6 +1,7 @@
 package model.filehandling;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.awt.List;
 import java.io.File; 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -126,5 +127,59 @@ public class ProjectsHandling {
             System.out.println("An Errror Ocurred");
             e.printStackTrace();
         }
+    }
+
+    public static void updateForNewNote(String noteTitle, String notePriority, String noteDescription) {
+        ArrayList<String> contents = ReadFromFile.getFileContents(FilePaths.CURRENTOPENFILE);
+        Integer numNotes;
+        try {
+            File targetFile = new File(FilePaths.CURRENTOPENFILE);
+            writer = new FileWriter(targetFile);
+            for (String data : contents) {
+                if (isInt(data)) {
+                    numNotes = Integer.parseInt(data);
+                    numNotes += 1;
+                    writer.write(numNotes + "\n");
+                } else {
+                    writer.write(data + "\n");
+                }
+            }
+            writer.write(noteTitle + "~" + notePriority + "~" + noteDescription + "\n");
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An Errror Ocurred");
+            e.printStackTrace();
+        }
+    }
+
+    private static boolean isInt(String data) {
+        try {
+            Integer.parseInt(data);
+            return true;
+        } catch (NumberFormatException e) {
+        } 
+        return false;
+    }
+
+    public static int getNumNotesFromProject(String projectPath) {
+        ArrayList<String> contents = ReadFromFile.getFileContents(projectPath);
+        int numNotes = Integer.parseInt(contents.get(1)); 
+        return numNotes;
+    }
+
+    public static ArrayList<String[]> getNotesContentsFromProject(String projectPath) {
+        ArrayList<String> rawContents = ReadFromFile.getFileContents(projectPath);
+        ArrayList<String[]> filteredContents = new ArrayList<String[]>();
+        String line;
+        for (int i = 2; i < rawContents.size(); i++ ) {
+            line = rawContents.get(i);
+            filteredContents.add(line.split("~"));
+        }
+        return filteredContents;
+    }
+
+    public static String getProjectName(String projectPath) {
+        ArrayList<String> contents = ReadFromFile.getFileContents(projectPath);
+        return contents.get(0);
     }
 }

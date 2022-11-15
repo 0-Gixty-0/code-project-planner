@@ -10,6 +10,7 @@ public class FilePaths {
     public static String NUMFILESFILEPATH = "C://Users//fired//Documents//GitHub//code-project-planner//projects//numFiles";
     public static String PROJECTNAMESFILEPATH = "C://Users//fired//Documents//GitHub//code-project-planner//projects//projectNames";
     public static String PROJECTPATHSFILE = "C://Users//fired//Documents//GitHub//code-project-planner//config//projectPaths";
+    public static String CURRENTOPENFILE;
     public static ArrayList<String> projectPaths;
     public static HashMap<String, String> projectPathsHashMap;
     public static ArrayList<String> projectNames;
@@ -25,6 +26,10 @@ public class FilePaths {
         for (int i = 0; i < projectPaths.size(); i++) {
             FilePaths.updateProjectPathsHashMap(projectNames.get(i), projectPaths.get(i));
         }
+    }
+
+    public static void SetCurrentOpenFile(String path) {
+        CURRENTOPENFILE = path;
     }
 
     public static void initializeConfig() {
