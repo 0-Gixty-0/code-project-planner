@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import config.*;
+import model.actions.DeleteNoteAction;
 import model.actions.EditNoteAction;
 import model.filehandling.ProjectsHandling;
 
@@ -19,6 +20,7 @@ public class ProjectWindow {
     JTextArea descriptionBox;
     JLabel priorityLabel;
     JButton editButton;
+    JButton deleteButton;
     GridBagConstraints constraints;
     ArrayList<String[]> notesContents;
     String[] noteData;
@@ -70,15 +72,17 @@ public class ProjectWindow {
     }
 
     private void createNotePanels() {
-        editButton = new JButton();
-        editButton.setText("Edit Note");
-        editButton.setAction(new EditNoteAction(notePanel));
-        
         for (int i=0; i < numNotes; i++) {
             noteData = notesContents.get(i);
 
             notePanel = new JPanel(new GridBagLayout());
             notePanel.setBorder(BorderFactory.createLineBorder(Color.black));
+
+            editButton = new JButton("Edit Note");
+            editButton.setAction(new EditNoteAction(notePanel));
+
+            deleteButton = new JButton("Delete Note");
+            deleteButton.setAction(new DeleteNoteAction(notePanel));
 
             title = new JLabel(noteData[0]);
 
@@ -93,9 +97,10 @@ public class ProjectWindow {
     }
 
     private void positionNoteComponents() {
-        GridPositioning.positionComponent(notePanel, title, 0, 0, GridBagConstraints.FIRST_LINE_START, 0.5, 0.1, 1, 1);
-        GridPositioning.positionComponent(notePanel, editButton, 1, 0, GridBagConstraints.CENTER, 0.0, 0.1, 1, 1);
-        GridPositioning.positionComponent(notePanel, priorityLabel, 2, 0, GridBagConstraints.FIRST_LINE_END, 0.0, 0.1, 1, 1);
-        GridPositioning.positionComponent(notePanel, descriptionBox, 0, 1, GridBagConstraints.PAGE_END, 0.0, 1.0, 3, 1);
+        GridPositioning.positionComponent(notePanel, title, 0, 0, GridBagConstraints.FIRST_LINE_START, 0.5, 0.8, 1, 1);
+        GridPositioning.positionWithPadding(notePanel, editButton, 1, 0, GridBagConstraints.CENTER, 0.0, 0.0, 1, 1, 5, 5);
+        GridPositioning.positionComponent(notePanel, priorityLabel, 3, 0, GridBagConstraints.FIRST_LINE_END, 0.0, 0.0, 1, 1);
+        GridPositioning.positionComponent(notePanel, descriptionBox, 0, 1, GridBagConstraints.PAGE_END, 0.0, 0.1, 3, 1);
+        GridPositioning.positionComponent(notePanel, deleteButton, 2, 0, GridBagConstraints.CENTER, 0.0, 0.0, 1, 1);
 }
 }

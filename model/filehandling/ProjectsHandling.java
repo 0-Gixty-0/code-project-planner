@@ -1,7 +1,6 @@
 package model.filehandling;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.awt.List;
 import java.io.File; 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -152,6 +151,25 @@ public class ProjectsHandling {
         }
     }
 
+    public static void updateForNoteUpdate(String noteContents, String newNoteContents, String noteTitle, String notePriority) {
+        ArrayList<String> contents = ReadFromFile.getFileContents(FilePaths.CURRENTOPENFILE);
+        try {
+            File targetFile = new File(FilePaths.CURRENTOPENFILE);
+            writer = new FileWriter(targetFile);
+            for (String data : contents) {
+                if (data.equals(noteTitle + "~" + notePriority + "~" + noteContents)) {
+                    writer.write(noteTitle + "~" + notePriority + "~" + newNoteContents + "\n");
+                } else {
+                    writer.write(data + "\n");
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An Errror Ocurred");
+            e.printStackTrace();
+        }
+    }
+
     private static boolean isInt(String data) {
         try {
             Integer.parseInt(data);
@@ -181,5 +199,29 @@ public class ProjectsHandling {
     public static String getProjectName(String projectPath) {
         ArrayList<String> contents = ReadFromFile.getFileContents(projectPath);
         return contents.get(0);
+    }
+
+    public static void removeNote(String noteContents, String noteTitle, String notePriority) {
+        ArrayList<String> contents = ReadFromFile.getFileContents(FilePaths.CURRENTOPENFILE);
+        Integer numNotes;
+        try {
+            File targetFile = new File(FilePaths.CURRENTOPENFILE);
+            writer = new FileWriter(targetFile);
+            for (String data : contents) {
+                if (!data.equals(noteTitle + "~" + notePriority + "~" + noteContents)) {
+                    if (isInt(data)) {
+                        numNotes = Integer.parseInt(data);
+                        numNotes -= 1;
+                        writer.write(numNotes + "\n");
+                    } else {
+                        writer.write(data + "\n");
+                    }
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An Errror Ocurred");
+            e.printStackTrace();
+        }
     }
 }

@@ -44,4 +44,10 @@ public class GridPositioning {
         GridPositioning.setConstraints(constraints, gridX, gridY, constant, weightX, weightY, gridWidth, gridHeight);
         panel.add(component, constraints);
     }
+
+    public static void positionWithPadding(JPanel panel,  Component component, int gridX, int gridY, int constant, double weightX, double weightY, int gridWidth, int gridHeight, int ipadx, int ipady) {
+        GridBagConstraints constraints = new GridBagConstraints();
+        GridPositioning.setConstraints(constraints, gridX, gridY, constant, weightX, weightY, gridWidth, gridHeight);
+        panel.add(component, constraints);
+    }
 }

@@ -3,46 +3,39 @@ package model.actions;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JLabel;
+import javax.swing.*;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 import model.filehandling.ProjectsHandling;
+import view.Window;
 
-public class SaveNoteAction extends AbstractAction{
-
+public class DeleteNoteAction extends AbstractAction{
     private JPanel notePanel;
+    private JFrame frame;
     private JTextArea textField;
-    private JButton button;
     private String noteContents;
-    private String newNoteContents;
     private String noteTitle;
     private String notePriority;
     private JLabel titleLabel;
     private JLabel priorityLabel;
 
-    public SaveNoteAction(JPanel notePanelPar, String noteContentsPar) {
+    public DeleteNoteAction(JPanel notePanelPar) {
         notePanel = notePanelPar;
-        noteContents = noteContentsPar;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        frame = Window.getJFrame();
         titleLabel = (JLabel) notePanel.getComponent(0);
         noteTitle = titleLabel.getText();
-        button = (JButton) notePanel.getComponent(1);
         priorityLabel = (JLabel) notePanel.getComponent(2);
         notePriority = priorityLabel.getText();
         textField = (JTextArea) notePanel.getComponent(3);
-        newNoteContents = textField.getText();
-        
-        textField.setEditable(false);
-        button.setText("Edit Note");
-        button.setAction(new EditNoteAction(notePanel));
-
-        ProjectsHandling.updateForNoteUpdate(noteContents, newNoteContents, noteTitle, notePriority);
-        
+        noteContents = textField.getText();
+        ProjectsHandling.removeNote(noteContents, noteTitle, notePriority);
+        notePanel.removeAll();
+        frame.remove(notePanel);
+        Window.revalidateFrame();
     }
     
 }
