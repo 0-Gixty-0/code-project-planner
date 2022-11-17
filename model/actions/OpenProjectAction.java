@@ -22,4 +22,8 @@ public class OpenProjectAction extends AbstractAction{
         FilePaths.CURRENTOPENFILE = FilePaths.projectPathsHashMap.get(projectName);
         new ProjectWindow();
     }
+
+    public static void openProject() {
+        new ProjectWindow();
+    }
 }

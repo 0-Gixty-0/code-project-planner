@@ -37,7 +37,7 @@ public class ProjectWindow {
 
         try {
             mainFrame = Window.getJFrame();
-            panel = new JPanel();
+            panel = Window.getMainPanel();
 
             createNotePanels();
 
@@ -78,12 +78,6 @@ public class ProjectWindow {
             notePanel = new JPanel(new GridBagLayout());
             notePanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-            editButton = new JButton("Edit Note");
-            editButton.setAction(new EditNoteAction(notePanel));
-
-            deleteButton = new JButton("Delete Note");
-            deleteButton.setAction(new DeleteNoteAction(notePanel));
-
             title = new JLabel(noteData[0]);
 
             descriptionBox = new JTextArea(noteData[2]);
@@ -91,16 +85,25 @@ public class ProjectWindow {
 
             priorityLabel = new JLabel(noteData[1]);
 
-            positionNoteComponents();
+            JButton editButtonNote;
+            editButtonNote = new JButton();
+            JButton deleteButtonNote;
+            deleteButtonNote = new JButton();
+            deleteButtonNote.setAction(new DeleteNoteAction(notePanel));
+            editButtonNote.setAction(new EditNoteAction(notePanel));
+            editButtonNote.setText("Edit Note");
+            deleteButtonNote.setText("Delete Note");
+
+            positionNoteComponents(editButtonNote, deleteButtonNote);
             notePanelsArray.add(notePanel);
         }
     }
 
-    private void positionNoteComponents() {
+    private void positionNoteComponents(JButton editButtonNote, JButton deleteButtonNote) {
         GridPositioning.positionComponent(notePanel, title, 0, 0, GridBagConstraints.FIRST_LINE_START, 0.5, 0.8, 1, 1);
-        GridPositioning.positionWithPadding(notePanel, editButton, 1, 0, GridBagConstraints.CENTER, 0.0, 0.0, 1, 1, 5, 5);
+        GridPositioning.positionWithPadding(notePanel, editButtonNote, 1, 0, GridBagConstraints.CENTER, 0.0, 0.0, 1, 1, 1, 1);
         GridPositioning.positionComponent(notePanel, priorityLabel, 3, 0, GridBagConstraints.FIRST_LINE_END, 0.0, 0.0, 1, 1);
         GridPositioning.positionComponent(notePanel, descriptionBox, 0, 1, GridBagConstraints.PAGE_END, 0.0, 0.1, 3, 1);
-        GridPositioning.positionComponent(notePanel, deleteButton, 2, 0, GridBagConstraints.CENTER, 0.0, 0.0, 1, 1);
+        GridPositioning.positionWithPadding(notePanel, deleteButtonNote, 2, 0, GridBagConstraints.CENTER, 0.0, 0.0, 1, 1, 1, 1);
 }
 }

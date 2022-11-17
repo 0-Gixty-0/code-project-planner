@@ -12,7 +12,6 @@ public class ReadFromFile {
             try {
                 File targetFile = new File(path);
                 Scanner reader = new Scanner(targetFile);
-                // reader.nextLine();
                 while (reader.hasNextLine()) {
                     contents.add(reader.nextLine());
                 }

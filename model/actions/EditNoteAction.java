@@ -24,8 +24,8 @@ public class EditNoteAction extends AbstractAction{
         textField = (JTextArea) notePanel.getComponent(3);
         noteContents = textField.getText();
         textField.setEditable(true);
-        button.setText("Save Edits");
         button.setAction(new SaveNoteAction(notePanel, noteContents));
+        button.setText("Save Edits");
         
     }
     

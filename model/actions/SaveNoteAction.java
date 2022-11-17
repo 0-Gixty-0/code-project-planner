@@ -38,8 +38,8 @@ public class SaveNoteAction extends AbstractAction{
         newNoteContents = textField.getText();
         
         textField.setEditable(false);
-        button.setText("Edit Note");
         button.setAction(new EditNoteAction(notePanel));
+        button.setText("Edit Note");
 
         ProjectsHandling.updateForNoteUpdate(noteContents, newNoteContents, noteTitle, notePriority);
         

@@ -39,6 +39,18 @@ public class GridPositioning {
         constraints.gridheight = gridHeight;
     }
 
+    public static void setConstraintsWithPadding(GridBagConstraints constraints, int gridX, int gridY, int constant, double weightX, double weightY, int gridWidth, int gridHeight, int ipadx, int ipady) {
+        constraints.gridx = gridX;
+        constraints.gridy = gridY;
+        constraints.anchor = constant;
+        constraints.weightx = weightX;
+        constraints.weighty = weightY;
+        constraints.gridwidth = gridWidth;
+        constraints.gridheight = gridHeight;
+        constraints.ipadx = ipadx;
+        constraints.ipady = ipady;
+    }
+
     public static void positionComponent(JPanel panel, Component component, int gridX, int gridY, int constant, double weightX, double weightY, int gridWidth, int gridHeight) {
         GridBagConstraints constraints = new GridBagConstraints();
         GridPositioning.setConstraints(constraints, gridX, gridY, constant, weightX, weightY, gridWidth, gridHeight);
@@ -46,6 +58,12 @@ public class GridPositioning {
     }
 
     public static void positionWithPadding(JPanel panel,  Component component, int gridX, int gridY, int constant, double weightX, double weightY, int gridWidth, int gridHeight, int ipadx, int ipady) {
+        GridBagConstraints constraints = new GridBagConstraints();
+        GridPositioning.setConstraintsWithPadding(constraints, gridX, gridY, constant, weightX, weightY, gridWidth, gridHeight, ipadx, ipady);
+        panel.add(component, constraints);
+    }
+
+    public static void positionWithInsets(JPanel panel,  Component component, int gridX, int gridY, int constant, double weightX, double weightY, int gridWidth, int gridHeight, int ipadx, int ipady) {
         GridBagConstraints constraints = new GridBagConstraints();
         GridPositioning.setConstraints(constraints, gridX, gridY, constant, weightX, weightY, gridWidth, gridHeight);
         panel.add(component, constraints);

@@ -8,6 +8,7 @@ import javax.swing.AbstractAction;
 import model.CollectInput;
 
 import view.NewNoteDialog;
+import view.Window;
 import model.filehandling.*;
 
 public class CreateNoteAction extends AbstractAction{
@@ -28,6 +29,8 @@ public class CreateNoteAction extends AbstractAction{
         noteDescription = inputStrings.get(1);
         notePriority = inputStrings.get(2);
         ProjectsHandling.updateForNewNote(noteTitle, notePriority, noteDescription);
+        Window.clear_panel();
+        OpenProjectAction.openProject();
     }
 
 

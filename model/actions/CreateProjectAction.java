@@ -34,6 +34,7 @@ public class CreateProjectAction extends AbstractAction{
         path = inputStrings.get(1) + "//" + projectName;
         createProjectTitle();
         createProjectFile();
+        FilePaths.CURRENTOPENFILE = FilePaths.projectPathsHashMap.get(projectName);
     }
 
     private void createProjectFile() {
